@@ -1,0 +1,9 @@
+type Done @model {
+  id: ID!
+  userId: String
+  name: String!
+  description: String
+  doneDate: String
+  createdAt: String
+  updatedAt: String
+}
