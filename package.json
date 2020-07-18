@@ -16,6 +16,7 @@
     "@types/react-bootstrap": "^1.0.1",
     "@types/react-dom": "^16.9.8",
     "@types/react-router-dom": "^5.1.5",
+    "@types/uuid": "^8.0.0",
     "aws-amplify": "^3.0.20",
     "bootstrap": "^4.5.0",
     "bootstrap-4-react": "0.0.59",
@@ -26,7 +27,8 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
-    "typescript": "^3.7.5"
+    "typescript": "^3.7.5",
+    "uuid": "^8.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
