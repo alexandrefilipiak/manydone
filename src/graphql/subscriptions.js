@@ -9,6 +9,7 @@ export const onCreateDone = /* GraphQL */ `
       name
       description
       doneDate
+      imageKey
       createdAt
       updatedAt
       _version
@@ -25,6 +26,7 @@ export const onUpdateDone = /* GraphQL */ `
       name
       description
       doneDate
+      imageKey
       createdAt
       updatedAt
       _version
@@ -41,6 +43,7 @@ export const onDeleteDone = /* GraphQL */ `
       name
       description
       doneDate
+      imageKey
       createdAt
       updatedAt
       _version

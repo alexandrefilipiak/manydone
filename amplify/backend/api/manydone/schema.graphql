@@ -4,6 +4,7 @@ type Done @model {
   name: String!
   description: String
   doneDate: String
+  imageKey: String
   createdAt: String
   updatedAt: String
 }

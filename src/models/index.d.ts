@@ -1,8 +1,8 @@
-import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplify/datastore";
-
-
-
-
+import {
+  ModelInit,
+  MutableModel,
+  PersistentModelConstructor,
+} from "@aws-amplify/datastore";
 
 export declare class Done {
   readonly id: string;
@@ -10,8 +10,12 @@ export declare class Done {
   readonly name: string;
   readonly description?: string;
   readonly doneDate?: string;
+  readonly imageKey?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Done>);
-  static copyOf(source: Done, mutator: (draft: MutableModel<Done>) => MutableModel<Done> | void): Done;
+  static copyOf(
+    source: Done,
+    mutator: (draft: MutableModel<Done>) => MutableModel<Done> | void
+  ): Done;
 }

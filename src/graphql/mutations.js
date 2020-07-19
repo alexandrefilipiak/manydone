@@ -12,6 +12,7 @@ export const createDone = /* GraphQL */ `
       name
       description
       doneDate
+      imageKey
       createdAt
       updatedAt
       _version
@@ -31,6 +32,7 @@ export const updateDone = /* GraphQL */ `
       name
       description
       doneDate
+      imageKey
       createdAt
       updatedAt
       _version
@@ -50,6 +52,7 @@ export const deleteDone = /* GraphQL */ `
       name
       description
       doneDate
+      imageKey
       createdAt
       updatedAt
       _version

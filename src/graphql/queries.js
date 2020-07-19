@@ -20,6 +20,7 @@ export const syncDones = /* GraphQL */ `
         name
         description
         doneDate
+        imageKey
         createdAt
         updatedAt
         _version
@@ -39,6 +40,7 @@ export const getDone = /* GraphQL */ `
       name
       description
       doneDate
+      imageKey
       createdAt
       updatedAt
       _version
@@ -60,6 +62,7 @@ export const listDones = /* GraphQL */ `
         name
         description
         doneDate
+        imageKey
         createdAt
         updatedAt
         _version
