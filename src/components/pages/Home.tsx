@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Done } from "../../models";
 import { DataStore } from "@aws-amplify/datastore";
 import { Storage } from "@aws-amplify/storage";
+import { Auth, CognitoUser } from "@aws-amplify/auth";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import { v4 as uuid } from "uuid";
@@ -12,7 +13,7 @@ interface DoneFormState {
   description: string;
   doneDate: string;
   image: File | null;
-  userId: string;
+  userId?: string;
 }
 
 interface DoneDisplay {
@@ -21,6 +22,7 @@ interface DoneDisplay {
   description?: string;
   doneDate?: string;
   imageUrl: string;
+  userId?: string;
 }
 
 const initialState: DoneFormState = {
@@ -34,9 +36,18 @@ const initialState: DoneFormState = {
 function Home() {
   const [formState, setFormState] = useState(initialState);
   const [dones, setDones] = useState<Done[]>([]);
+  const [username, setUsername] = useState("");
   const [donesDisplay, setDonesDisplay] = useState<DoneDisplay[]>([]);
 
   useEffect(() => {
+    Auth.currentAuthenticatedUser()
+      .then((user) => {
+        setUsername(user.username);
+        setFormState({ ...formState, userId: user.username });
+        console.log("the user id:", user);
+      })
+      .catch(() => console.log("Not signed in"));
+
     fetchDones();
     const subscription = DataStore.observe(Done).subscribe(() => fetchDones());
   }, []);
@@ -44,6 +55,7 @@ function Home() {
   async function fetchDones() {
     const dones = await DataStore.query(Done);
     setDones(dones);
+    console.log("dones=", dones);
     setSignedDonesDisplay(dones);
   }
 
@@ -95,6 +107,7 @@ function Home() {
     await Storage.put(imageKey, image);
 
     let doneToSave = _.omit(formState, "image", "imageUrl");
+    console.log("doneToSave", doneToSave);
     await DataStore.save(new Done({ imageKey, ...doneToSave }));
     setFormState(initialState);
   }
@@ -132,6 +145,7 @@ function Home() {
         <div key={done.id}>
           <img alt={done.imageUrl} src={done.imageUrl}></img>
           <h3>{done.name}</h3>
+          <h3>the user id : {done.userId}</h3>
         </div>
       ))}
       {/* </tbody>
