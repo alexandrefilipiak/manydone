@@ -8,3 +8,13 @@ type Done @model {
   createdAt: String
   updatedAt: String
 }
+type User @model {
+  id: ID!
+  username: String!
+  firstName: String
+  lastName: String
+  bio: String
+  image: String
+  createdAt: String
+  updatedAt: String
+}
