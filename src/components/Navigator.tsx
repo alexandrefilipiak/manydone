@@ -22,6 +22,11 @@ const HomeItems = () => {
         </a>
       </li>
       <li className="nav-item">
+        <a className="nav-link" href="#/profile">
+          Profile
+        </a>
+      </li>
+      <li className="nav-item">
         <button className="btn btn-primary" onClick={() => signout()}>
           Signout
         </button>
@@ -49,7 +54,42 @@ const LoginItems = () => {
         </a>
       </li>
       <li className="nav-item">
-        <button onClick={() => signout()} />
+        <a className="nav-link" href="#/profile">
+          Profile
+        </a>
+      </li>
+      <li className="nav-item">
+        <button className="btn btn-primary" onClick={() => signout()} />
+      </li>
+    </>
+  );
+};
+
+const ProfileItems = () => {
+  function signout() {
+    Auth.signOut()
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
+  }
+  return (
+    <>
+      <li className="nav-item active">
+        <a className="nav-link" href="#/">
+          Home <span className="sr-only">(current)</span>
+        </a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link" href="#/login">
+          Login
+        </a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link" href="#/profile">
+          Profile
+        </a>
+      </li>
+      <li className="nav-item">
+        <button className="btn btn-primary" onClick={() => signout()} />
       </li>
     </>
   );
@@ -79,6 +119,7 @@ export default class Navigator extends Component {
               <Switch>
                 <Route exact path="/" component={HomeItems} />
                 <Route exact path="/login" component={LoginItems} />
+                <Route exact path="/profile" component={ProfileItems} />
               </Switch>
             </HashRouter>
           </ul>
