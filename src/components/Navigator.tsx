@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 
 import { HashRouter, Route, Switch } from "react-router-dom";
-import { Auth } from "aws-amplify";
+import { Auth, Hub, Logger } from "aws-amplify";
+import { HubCapsule } from "@aws-amplify/core";
 
 const HomeItems = () => {
   function signout() {
@@ -95,8 +96,47 @@ const ProfileItems = () => {
   );
 };
 
-export default class Navigator extends Component {
+const logger = new Logger("Navigator");
+
+interface Props {}
+
+interface State {
+  user: {
+    username: string;
+  } | null;
+}
+
+export default class Navigator extends Component<Props, State> {
+  state: State;
+
+  constructor(props: Props) {
+    super(props);
+
+    this.loadUser = this.loadUser.bind(this);
+
+    Hub.listen("auth", this.onHubCapsule); // Add this component as a listener of auth events.
+
+    this.state = { user: null };
+  }
+
+  componentDidMount() {
+    this.loadUser(); // The first check
+  }
+
+  onHubCapsule(capsule: HubCapsule) {
+    logger.info("on Auth event", capsule);
+    this.loadUser(); // Triggered every time user sign in / out.
+  }
+
+  loadUser() {
+    Auth.currentAuthenticatedUser()
+      .then((user) => this.setState({ user: user }))
+      .catch((err) => this.setState({ user: null }));
+  }
+
   render() {
+    const { user } = this.state;
+
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <a className="navbar-brand" href="/">
@@ -123,6 +163,9 @@ export default class Navigator extends Component {
               </Switch>
             </HashRouter>
           </ul>
+          <span className="navbar-text">
+            {user ? "Hi " + user.username : "Please sign in"}
+          </span>
           <form className="form-inline my-2 my-lg-0">
             <input
               className="form-control mr-sm-2"
