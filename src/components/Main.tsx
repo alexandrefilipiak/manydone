@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Profile from "./pages/Profile";
+import { Home, Login, Profile } from "./pages";
 import Container from "react-bootstrap/Container";
 import { HashRouter, Route, Switch } from "react-router-dom";
 
