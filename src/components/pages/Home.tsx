@@ -33,7 +33,13 @@ const initialState: DoneFormState = {
   userId: "",
 };
 
-function Home() {
+interface Props {
+  user: {
+    username: string;
+  } | null;
+}
+
+function Home(props: Props) {
   const [formState, setFormState] = useState(initialState);
   const [dones, setDones] = useState<Done[]>([]);
   const [username, setUsername] = useState("");

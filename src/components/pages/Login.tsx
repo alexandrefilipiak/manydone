@@ -2,10 +2,27 @@ import React, { Component } from "react";
 import { Auth } from "aws-amplify";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 
-class Login extends Component {
+interface Props {
+  user: {
+    username: string;
+  } | null;
+}
+
+interface State {}
+
+class Login extends Component<Props, State> {
   render() {
-    //return <h1>Login</h1>;
-    return <>{Auth.federatedSignIn()}</>;
+    const { user } = this.props;
+    return (
+      <>
+        {!user && Auth.federatedSignIn()}
+        {user && (
+          <div>
+            You are signed in as <i>{user.username}</i>.
+          </div>
+        )}
+      </>
+    );
   }
 }
 
