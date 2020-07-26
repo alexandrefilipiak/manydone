@@ -6,22 +6,35 @@ import { withFederated } from "aws-amplify-react";
 const logger = new Logger("JSignIn");
 
 const FederatedButtons = (props) => (
-  <Button
-    variant="secondary"
-    mt="1"
-    size="lg"
-    block
-    style={{ width: "100%" }}
-    onClick={props.facebookSignIn}
-  >
-    Facebook
-  </Button>
+  <>
+    <Button
+      variant="secondary"
+      mt="1"
+      size="lg"
+      block
+      style={{ width: "100%" }}
+      onClick={props.facebookSignIn}
+    >
+      Facebook
+    </Button>
+    <Button
+      variant="secondary"
+      mt="1"
+      size="lg"
+      block
+      style={{ width: "100%" }}
+      onClick={props.googleSignIn}
+    >
+      Google
+    </Button>
+  </>
 );
 
 const Federated = withFederated(FederatedButtons);
 
 const federated_data = {
-  google_client_id: "",
+  google_client_id:
+    "965464288608-eq384s4i76u0tq8kcmrsc9acrff9k75j.apps.googleusercontent.com",
   facebook_app_id: "286828136089750",
   amazon_client_id: "",
 };
