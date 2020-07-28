@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import { Auth } from "aws-amplify";
-import { MSignIn } from "../auth";
-import { Authenticator } from "aws-amplify-react";
+import { MSignIn, MConfirmSignIn, MSignUp } from "../auth";
+import {
+  Authenticator,
+  SignIn,
+  ConfirmSignIn,
+  SignUp,
+} from "aws-amplify-react";
 
 // "@aws-amplify/ui-react";
 
@@ -16,8 +21,11 @@ interface Props {
 interface State {}
 
 const CustomAuthenticator = () => (
-  <Authenticator hideDefault>
+  <Authenticator hide={[SignIn, ConfirmSignIn, SignUp]}>
+    {/* hideDefault> */}
     <MSignIn />
+    <MConfirmSignIn />
+    <MSignUp />
   </Authenticator>
 );
 
@@ -29,9 +37,9 @@ class Login extends Component<Props, State> {
         {/*Auth.federatedSignIn() */}
         {!user && <CustomAuthenticator />}
         {user && (
-          <div>
+          <>
             You are signed in as <i>{user.username}</i>.
-          </div>
+          </>
         )}
       </>
     );

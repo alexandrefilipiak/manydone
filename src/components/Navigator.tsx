@@ -3,8 +3,9 @@ import React, { Component } from "react";
 import { HashRouter, Route, Switch } from "react-router-dom";
 import { Auth, Hub, Logger } from "aws-amplify";
 import { HubCapsule } from "@aws-amplify/core";
+import { MSignOut } from "./auth";
 
-const HomeItems = () => {
+const HomeItems = (user: any) => {
   function signout() {
     Auth.signOut()
       .then((data) => console.log(data))
@@ -28,15 +29,16 @@ const HomeItems = () => {
         </a>
       </li>
       <li className="nav-item">
-        <button className="btn btn-primary" onClick={() => signout()}>
+        {/* <button className="btn btn-primary" onClick={() => signout()}>
           Signout
-        </button>
+        </button> */}
+        {user && <MSignOut />}
       </li>
     </>
   );
 };
 
-const LoginItems = () => {
+const LoginItems = (user: any) => {
   function signout() {
     Auth.signOut()
       .then((data) => console.log(data))
@@ -60,13 +62,16 @@ const LoginItems = () => {
         </a>
       </li>
       <li className="nav-item">
-        <button className="btn btn-primary" onClick={() => signout()} />
+        {/* <button className="btn btn-primary" onClick={() => signout()}>
+          Signout
+        </button> */}
+        {user && <MSignOut />}
       </li>
     </>
   );
 };
 
-const ProfileItems = () => {
+const ProfileItems = (user: any) => {
   function signout() {
     Auth.signOut()
       .then((data) => console.log(data))
@@ -90,7 +95,10 @@ const ProfileItems = () => {
         </a>
       </li>
       <li className="nav-item">
-        <button className="btn btn-primary" onClick={() => signout()} />
+        {/* <button className="btn btn-primary" onClick={() => signout()}>
+          Signout
+        </button> */}
+        {user && <MSignOut />}
       </li>
     </>
   );
@@ -157,9 +165,21 @@ export default class Navigator extends Component<Props, State> {
           <ul className="navbar-nav mr-auto">
             <HashRouter>
               <Switch>
-                <Route exact path="/" component={HomeItems} />
-                <Route exact path="/login" component={LoginItems} />
-                <Route exact path="/profile" component={ProfileItems} />
+                <Route
+                  exact
+                  path="/"
+                  component={() => HomeItems(this.state.user)}
+                />
+                <Route
+                  exact
+                  path="/login"
+                  component={() => LoginItems(this.state.user)}
+                />
+                <Route
+                  exact
+                  path="/profile"
+                  component={() => ProfileItems(this.state.user)}
+                />
               </Switch>
             </HashRouter>
           </ul>

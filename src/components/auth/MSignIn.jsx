@@ -3,7 +3,7 @@ import { Container, Form, Button, Alert, Row, Col } from "react-bootstrap";
 import { Auth, Logger, JS } from "aws-amplify";
 import { withFederated } from "aws-amplify-react";
 
-const logger = new Logger("JSignIn");
+const logger = new Logger("MSignIn");
 
 const FederatedButtons = (props) => (
   <>

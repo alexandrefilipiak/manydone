@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Form, Button, Alert, Row, Col, BA } from "react-bootstrap";
-//import { BDiv } from "bootstrap-4-react";
+import { Form, Button, Alert, Row, Col } from "react-bootstrap";
 import { Auth, Logger } from "aws-amplify";
 
 const logger = new Logger("JSignUp");
@@ -64,7 +63,8 @@ export default class MSignUp extends Component {
     const { error } = this.state;
 
     return (
-      <BDiv display="flex" flex="column" alignItems="center">
+      <div>
+        {/* display="flex" flex="column" alignItems="center" */}
         <Form style={style} preventDefault>
           <Form.Input
             type="text"
@@ -100,22 +100,28 @@ export default class MSignUp extends Component {
           />
           <Row my="2" style={style.links}>
             <Col text="left">
-              <BA
-                href="#"
-                preventDefault
-                onClick={() => this.changeState("signIn")}
+              <a
+                href="/"
+                onClick={(e) => {
+                  e.preventDefault();
+                  this.changeState("signIn");
+                }}
               >
+                {/* preventDefault */}
                 Back to sign in
-              </BA>
+              </a>
             </Col>
             <Col text="right">
-              <BA
-                href="#"
-                preventDefault
-                onClick={() => this.changeState("confirmSignUp")}
+              <a
+                href="/"
+                onClick={(e) => {
+                  e.preventDefault();
+                  this.changeState("confirmSignUp");
+                }}
               >
+                {/* preventDefault */}
                 Confirm a code
-              </BA>
+              </a>
             </Col>
           </Row>
           <Button primary mt="3" style={style.button} onClick={this.signUp}>
@@ -127,7 +133,7 @@ export default class MSignUp extends Component {
             </Alert>
           )}
         </Form>
-      </BDiv>
+      </div>
     );
   }
 }
