@@ -41,25 +41,27 @@ interface Props {
 
 function Home(props: Props) {
   const [formState, setFormState] = useState(initialState);
-  const [dones, setDones] = useState<Done[]>([]);
   const [username, setUsername] = useState("");
+  const [dones, setDones] = useState<Done[]>([]);
   const [donesDisplay, setDonesDisplay] = useState<DoneDisplay[]>([]);
 
   useEffect(() => {
     Auth.currentAuthenticatedUser()
       .then((user) => {
-        setUsername(user.username);
+        console.log("the user name:", username);
         setFormState({ ...formState, userId: user.username });
         console.log("the user id:", user);
+        fetchDones(user.username);
+        setUsername(user.username);
+        const subscription = DataStore.observe(Done).subscribe(() =>
+          fetchDones(username)
+        );
       })
       .catch(() => console.log("Not signed in"));
-
-    fetchDones();
-    const subscription = DataStore.observe(Done).subscribe(() => fetchDones());
   }, []);
 
-  async function fetchDones() {
-    const dones = await DataStore.query(Done);
+  async function fetchDones(username: string) {
+    const dones = await DataStore.query(Done, (d) => d.userId("eq", username));
     setDones(dones);
     console.log("dones=", dones);
     setSignedDonesDisplay(dones);
