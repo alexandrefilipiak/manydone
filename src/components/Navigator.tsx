@@ -3,7 +3,8 @@ import React, { Component } from "react";
 import { HashRouter, Route, Switch } from "react-router-dom";
 import { Auth, Hub, Logger } from "aws-amplify";
 import { HubCapsule } from "@aws-amplify/core";
-import { MSignOut } from "./auth";
+import { AmplifySignOut } from "@aws-amplify/ui-react";
+// import { MSignOut } from "./auth";
 
 const HomeItems = (user: any) => {
   function signout() {
@@ -32,7 +33,7 @@ const HomeItems = (user: any) => {
         {/* <button className="btn btn-primary" onClick={() => signout()}>
           Signout
         </button> */}
-        {user && <MSignOut />}
+        {user && <AmplifySignOut />}
       </li>
     </>
   );
@@ -65,7 +66,7 @@ const LoginItems = (user: any) => {
         {/* <button className="btn btn-primary" onClick={() => signout()}>
           Signout
         </button> */}
-        {user && <MSignOut />}
+        {user && <AmplifySignOut />}
       </li>
     </>
   );
@@ -98,7 +99,7 @@ const ProfileItems = (user: any) => {
         {/* <button className="btn btn-primary" onClick={() => signout()}>
           Signout
         </button> */}
-        {user && <MSignOut />}
+        {user && <AmplifySignOut />}
       </li>
     </>
   );
