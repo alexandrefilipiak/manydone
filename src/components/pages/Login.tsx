@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Auth } from "aws-amplify";
-import { MSignIn, MConfirmSignIn, MSignUp } from "../auth";
+// import { MSignIn, MConfirmSignIn, MSignUp } from "../auth";
 import {
-  Authenticator,
-  SignIn,
-  ConfirmSignIn,
-  SignUp,
-} from "aws-amplify-react";
+  AmplifyAuthenticator,
+  AmplifySignIn,
+  AmplifyConfirmSignIn,
+  AmplifySignUp,
+} from "@aws-amplify/ui-react";
 
 // "@aws-amplify/ui-react";
 
@@ -21,12 +21,12 @@ interface Props {
 interface State {}
 
 const CustomAuthenticator = () => (
-  <Authenticator hide={[SignIn, ConfirmSignIn, SignUp]}>
+  <AmplifyAuthenticator
+  // hide={[AmplifySignIn, AmplifyConfirmSignIn, AmplifySignUp]}
+  >
     {/* hideDefault> */}
-    <MSignIn />
-    <MConfirmSignIn />
-    <MSignUp />
-  </Authenticator>
+    <div>Logged in</div>
+  </AmplifyAuthenticator>
 );
 
 class Login extends Component<Props, State> {
