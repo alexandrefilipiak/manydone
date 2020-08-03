@@ -48,7 +48,7 @@ function Home(props: Props) {
   useEffect(() => {
     Auth.currentAuthenticatedUser()
       .then((user) => {
-        console.log("the user name:", username);
+        console.log("the user name:", user.username);
         setFormState({ ...formState, userId: user.username });
         console.log("the user id:", user);
         fetchDones(user.username);
@@ -107,8 +107,10 @@ function Home(props: Props) {
 
   async function createDone() {
     const { name, image } = formState;
-    if (!name || !image || !image.name) return;
+    console.log("name=" + name + "image=" + image);
 
+    if (!name || !image || !image.name) return;
+    console.log("name=" + name + "image=" + image);
     const imageKey =
       uuid() + formState.image!.name.replace(/\s/g, "-").toLowerCase();
 
@@ -117,7 +119,8 @@ function Home(props: Props) {
     let doneToSave = _.omit(formState, "image", "imageUrl");
     console.log("doneToSave", doneToSave);
     await DataStore.save(new Done({ imageKey, ...doneToSave }));
-    setFormState(initialState);
+
+    setFormState({ ...formState, userId: username });
   }
 
   async function setImage(e: React.ChangeEvent<HTMLInputElement>) {
