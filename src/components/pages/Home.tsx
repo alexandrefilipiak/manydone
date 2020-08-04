@@ -46,6 +46,7 @@ function Home(props: Props) {
   const [donesDisplay, setDonesDisplay] = useState<DoneDisplay[]>([]);
 
   useEffect(() => {
+    let subscription: any;
     Auth.currentAuthenticatedUser()
       .then((user) => {
         console.log("the user name:", user.username);
@@ -53,11 +54,16 @@ function Home(props: Props) {
         console.log("the user id:", user);
         fetchDones(user.username);
         setUsername(user.username);
-        const subscription = DataStore.observe(Done).subscribe(() =>
+        subscription = DataStore.observe(Done).subscribe(() =>
           fetchDones(username)
         );
       })
       .catch(() => console.log("Not signed in"));
+
+    return () => {
+      //cleanup when component unmount
+      subscription.unsubscribe();
+    };
   }, []);
 
   async function fetchDones(username: string) {
