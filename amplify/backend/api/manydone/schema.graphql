@@ -1,4 +1,4 @@
-type Done @model {
+type Done @model @auth(rules: [{ allow: owner }]) {
   id: ID!
   userId: String
   name: String!
