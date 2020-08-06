@@ -8,7 +8,7 @@ type Done @model @auth(rules: [{ allow: owner }]) {
   createdAt: String
   updatedAt: String
 }
-type User @model {
+type User @model @auth(rules: [{ allow: owner }]) {
   id: ID!
   username: String!
   firstName: String
